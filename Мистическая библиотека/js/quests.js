@@ -9,50 +9,25 @@
    ПРОГРЕСС КВЕСТОВ
 ========================================================= */
 
-/*
- * Проверяет текущее состояние игры
- * и обновляет состояние всех квестов.
- *
- * Важно:
- * quests.js отвечает только за квестовую логику.
- * Сохранение выполняется в том месте,
- * где изменяется основной state.
- */
-
 function progressQuests() {
 
     state.quests.firstBook =
         state.books.length >= 1;
 
-
     state.quests.attention =
-        state.books.includes(
-            "attention"
-        );
-
+        state.books.includes("attention");
 
     state.quests.perception =
-        state.books.includes(
-            "perception"
-        );
-
+        state.books.includes("perception");
 
     state.quests.silence =
-        state.books.includes(
-            "silence"
-        );
-
+        state.books.includes("silence");
 
     state.quests.dream =
-        state.books.includes(
-            "dream"
-        );
-
+        state.books.includes("dream");
 
     state.quests.mirror =
-        state.books.includes(
-            "mirror"
-        );
+        state.books.includes("mirror");
 
 }
 
@@ -64,31 +39,18 @@ function progressQuests() {
 function renderQuests() {
 
     const list =
-        document.getElementById(
-            "questList"
-        );
+        document.getElementById("questList");
 
-
-    /*
-     * Если панели квестов нет,
-     * просто ничего не делаем.
-     */
 
     if (!list) {
-
         return;
-
     }
 
 
     /*
-     * Формируем список ЗАНОВО при каждом
-     * вызове renderQuests().
-     *
-     * Это важно:
-     * состояние квеста берётся из state
-     * в момент отображения, а не один раз
-     * при загрузке файла.
+     * Создаём список при каждом вызове.
+     * Поэтому здесь всегда находится
+     * актуальное состояние state.quests.
      */
 
     const quests = [
@@ -101,7 +63,6 @@ function renderQuests() {
 
             completed:
                 state.quests.firstBook
-
         },
 
         {
@@ -112,7 +73,6 @@ function renderQuests() {
 
             completed:
                 state.quests.attention
-
         },
 
         {
@@ -123,7 +83,6 @@ function renderQuests() {
 
             completed:
                 state.quests.perception
-
         },
 
         {
@@ -134,7 +93,6 @@ function renderQuests() {
 
             completed:
                 state.quests.silence
-
         },
 
         {
@@ -145,7 +103,6 @@ function renderQuests() {
 
             completed:
                 state.quests.dream
-
         },
 
         {
@@ -156,62 +113,53 @@ function renderQuests() {
 
             completed:
                 state.quests.mirror
-
         }
 
     ];
 
 
-    /*
-     * Полностью очищаем старое отображение.
-     */
-
     list.innerHTML = "";
 
 
-    quests.forEach(
-        quest => {
+    quests.forEach(quest => {
 
-            const element =
-                document.createElement(
-                    "div"
-                );
+        const element =
+            document.createElement("div");
 
 
-            element.className =
-                "quest " +
-                (
-                    quest.completed
-                        ? "done"
-                        : ""
-                );
-
-
-            element.innerHTML = `
-
-                <h3>
-                    ${
-                        quest.completed
-                            ? "✓ "
-                            : ""
-                    }${quest.title}
-                </h3>
-
-                <p>
-                    ${quest.description}
-                </p>
-
-            `;
-
-
-            list.appendChild(
-                element
+        element.className =
+            "quest " +
+            (
+                quest.completed
+                    ? "done"
+                    : ""
             );
 
-        }
-    );
+
+        element.innerHTML = `
+
+            <h3>
+                ${
+                    quest.completed
+                        ? "✓ "
+                        : ""
+                }${quest.title}
+            </h3>
+
+            <p>
+                ${quest.description}
+            </p>
+
+        `;
+
+
+        list.appendChild(element);
+
+    });
 
 }
+
+
 
 
 
