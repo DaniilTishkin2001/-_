@@ -4655,20 +4655,27 @@ function keeperDialogue(
    ПАНЕЛИ
 ========================================================= */
 
+
 function showPanel(id){
 
     closePanels();
 
 
-    document
-        .getElementById(id)
-        .classList
-        .add("show");
+    const panel =
+        document.getElementById(id);
+
+
+    if(!panel){
+        return;
+    }
+
+
+    panel.classList.add("show");
 
 
     /*
-     * При каждом открытии карты
-     * принудительно обновляем её.
+     * При открытии карты
+     * обновляем её состояние.
      */
 
     if(id==="mapPanel"){
@@ -4677,7 +4684,23 @@ function showPanel(id){
 
     }
 
+
+    /*
+     * При открытии панели квестов
+     * заново строим список.
+     *
+     * Благодаря этому игрок всегда
+     * видит актуальный прогресс.
+     */
+
+    if(id==="questPanel"){
+
+        renderQuests();
+
+    }
+
 }
+
 
 
 function closePanels(){
