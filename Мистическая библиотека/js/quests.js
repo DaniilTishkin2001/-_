@@ -4,11 +4,6 @@
    Мистическая библиотека
 ========================================================= */
 
-
-/* =========================================================
-   ПРОГРЕСС КВЕСТОВ
-========================================================= */
-
 function progressQuests() {
 
     state.quests.firstBook =
@@ -28,7 +23,6 @@ function progressQuests() {
 
     state.quests.mirror =
         state.books.includes("mirror");
-
 }
 
 
@@ -41,16 +35,15 @@ function renderQuests() {
     const list =
         document.getElementById("questList");
 
-
     if (!list) {
         return;
     }
 
 
     /*
-     * Создаём список при каждом вызове.
-     * Поэтому здесь всегда находится
-     * актуальное состояние state.quests.
+     * ВАЖНО:
+     * список создаётся внутри функции,
+     * поэтому всегда получает актуальное состояние.
      */
 
     const quests = [
@@ -158,7 +151,6 @@ function renderQuests() {
     });
 
 }
-
 
 
 
